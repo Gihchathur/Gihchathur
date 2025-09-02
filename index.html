@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gihan Chathuranga | Portfolio</title>
+  <meta name="description" content="Portfolio of Gihan Chathuranga — Software Engineer, DevOps & Cloud-Native enthusiast. Kubernetes, Helm, Observability, Azure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.12);
+      --text: #e8ecf8;
+      --muted: #a5b0d3;
+      --accent: #7c9cff;
+      --accent-2: #7ef0e4;
+      --ring: 0 0 0 8px rgba(124,156,255,0.15);
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+      --grid-gap: clamp(14px, 1.5vw, 22px);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 90% -10%, rgba(124,156,255,0.25), transparent 40%),
+        radial-gradient(900px 600px at -10% 10%, rgba(126,240,228,0.18), transparent 40%),
+        linear-gradient(180deg, #090e1a 0%, #0b1020 60%, #0b1020 100%);
+      background-attachment: fixed;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{opacity:.9}
+    .container{width:min(1100px, 92%); margin:0 auto}
+    header.nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:rgba(9,14,26,0.5);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+    .badge{
+      width:36px; height:36px; border-radius:12px;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      display:grid; place-items:center; color:#0b1020; font-weight:800;
+      box-shadow: var(--shadow);
+    }
+    .nav-links{display:flex; gap:18px; align-items:center}
+    .nav-links a{color:var(--muted); font-weight:600}
+    .nav-links a:hover{color:var(--text)}
+    .theme-toggle{border:none; background:var(--panel); color:var(--text); padding:10px 12px; border-radius:12px; cursor:pointer}
+    .hero{padding:80px 0 40px}
+    .hero-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--grid-gap)}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+    .card{background:var(--panel); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card.pad{padding:28px}
+    .headline h1{font-size:clamp(28px, 4vw, 46px); margin:0 0 10px}
+    .headline p{color:var(--muted); font-size:clamp(14px, 1.5vw, 17px); line-height:1.7}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .chip{background:var(--panel-strong); border:1px solid rgba(255,255,255,0.12); padding:8px 12px; border-radius:999px; font-size:13px; color:#d6dcf7}
+    .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,0.14);
+      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); color:var(--text); font-weight:700; cursor:pointer;
+      transition: transform .05s ease; will-change:transform;
+    }
+    .btn:hover{box-shadow:var(--ring)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b1020; border-color:transparent}
+
+    .profile{display:grid; place-items:center; padding:24px}
+    .avatar{width:140px; height:140px; border-radius:36px; background:radial-gradient(circle at 30% 30%, #fff, #ddebff 35%, #a7c2ff 60%, #7c9cff);
+      display:grid; place-items:center; color:#0b1020; font-weight:900; font-size:42px; box-shadow:var(--shadow); border:3px solid rgba(255,255,255,0.5)}
+    .quick{margin-top:14px; text-align:center; color:var(--muted)}
+
+    section{padding:22px 0 8px}
+    h2{font-size:clamp(20px,2.4vw,28px)}
+
+    /* Grid cards */
+    .grid{display:grid; gap:var(--grid-gap)}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+    @media(max-width:950px){.grid.cols-3{grid-template-columns: repeat(2, 1fr)}}
+    @media(max-width:650px){.grid.cols-3,.grid.cols-2{grid-template-columns: 1fr}}
+
+    .section-card{padding:22px}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:26px}
+    .timeline:before{content:""; position:absolute; left:10px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg, var(--accent), transparent)}
+    .item{position:relative; padding:12px 12px 14px; border-radius:14px; background:var(--panel); border:1px solid rgba(255,255,255,0.08)}
+    .item + .item{margin-top:12px}
+    .dot{position:absolute; left:-18px; top:18px; width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px rgba(124,156,255,0.2)}
+    .item h3{margin:.2rem 0; font-size:18px}
+    .item .meta{color:var(--muted); font-weight:600; font-size:13px}
+    .item p{color:#d4dbfa; margin:.4rem 0 0}
+
+    /* Skills */
+    .skills{display:flex; flex-wrap:wrap; gap:10px}
+    .skill{padding:10px 12px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,0.1); font-weight:600}
+
+    /* Projects */
+    .project{position:relative; overflow:hidden; border-radius:16px; border:1px solid rgba(255,255,255,0.12); background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))}
+    .project .cap{padding:16px 18px}
+    .project h3{margin:0 0 6px}
+    .project p{margin:0; color:#d6dcf7}
+    .project .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tag{font-size:12px; padding:6px 10px; border-radius:999px; background:var(--panel-strong); border:1px solid rgba(255,255,255,0.12)}
+    .project .bar{position:absolute; inset:auto 0 0 0; height:4px; background:linear-gradient(90deg, var(--accent), var(--accent-2))}
+    .project:hover{transform:translateY(-1px)}
+
+    /* Footer */
+    footer{padding:40px 0 60px; color:var(--muted); text-align:center}
+    .links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
+
+    /* Light theme */
+    .light{--bg:#f6f8ff; --panel:rgba(255,255,255,0.85); --panel-strong:#fff; --text:#0b1020; --muted:#51607a; --shadow:0 10px 30px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gihan Chathuranga",
+    "jobTitle": "Software Engineer",
+    "url": "https://gihchathur.github.io/",
+    "sameAs": [
+      "https://github.com/Gihchathur",
+      "https://www.linkedin.com/in/gihan-chathuranga-159825194/"
+    ],
+    "email": "mailto:gihchathurhan@gmail.com",
+    "alumniOf": [
+      {"@type":"CollegeOrUniversity","name":"Mälardalen University"},
+      {"@type":"CollegeOrUniversity","name":"University of Sri Jayewardenepura"}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><div class="badge">GC</div> Gihan Chathuranga</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card pad headline">
+          <h1>Building reliable software & cloud-native platforms.</h1>
+          <p>
+            I’m <strong>Gihan</strong> — Software Engineer and DevOps/Observability enthusiast.
+            I design, build, and operate services with <strong>Kubernetes</strong>, <strong>Helm</strong>, <strong>Azure</strong>, and
+            <strong>OpenTelemetry</strong>. Previously at <strong>Creative Software</strong>, now pursuing a Master’s at
+            <strong>Mälardalen University</strong> (Sweden).
+          </p>
+          <div class="chips">
+            <span class="chip">Kubernetes</span>
+            <span class="chip">Helm</span>
+            <span class="chip">Docker</span>
+            <span class="chip">Azure</span>
+            <span class="chip">Prometheus</span>
+            <span class="chip">Grafana</span>
+            <span class="chip">OpenTelemetry</span>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="https://github.com/Gihchathur" target="_blank" rel="noopener">View GitHub →</a>
+            <a class="btn" href="https://www.linkedin.com/in/gihan-chathuranga-159825194/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="#projects">See Projects</a>
+            <a class="btn" href="mailto:gihchathurhan@gmail.com">Email Me</a>
+          </div>
+        </div>
+        <aside class="card profile">
+          <div class="avatar">GC</div>
+          <div class="quick">Based in Sweden · Open to part-time roles</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="grid cols-2">
+      <article class="card section-card">
+        <h2>About</h2>
+        <p>
+          I have 4+ years experience shipping backend features, CI/CD automation, and production
+          observability for a Norwegian healthcare platform (DIPS). My focus is crafting clean, reliable
+          systems and useful dashboards that help teams move faster.
+        </p>
+        <div class="grid cols-2" style="margin-top:10px">
+          <div class="item"><div class="dot"></div>
+            <h3>Master’s — Software Engineering</h3>
+            <div class="meta">Mälardalen University · 2025 — ongoing</div>
+          </div>
+          <div class="item"><div class="dot"></div>
+            <h3>B.Eng — Computer Engineering</h3>
+            <div class="meta">University of Sri Jayewardenepura · 2017 — 2021</div>
+          </div>
+        </div>
+      </article>
+      <article class="card section-card">
+        <h2>What I enjoy</h2>
+        <ul>
+          <li>Designing resilient services and clean Helm charts</li>
+          <li>Making Grafana dashboards that actually help</li>
+          <li>Keeping CI/CD pipelines fast and boring</li>
+          <li>Helping teams adopt OpenTelemetry properly</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="card section-card">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="item">
+          <div class="dot"></div>
+          <h3>Software Engineer — Creative Software</h3>
+          <div class="meta">Aug 2021 — Jul 2024 · Colombo, Sri Lanka</div>
+          <p>
+            Built and maintained the Notification Center and an Admin Portal for a hospital management platform.
+            Drove improvements in performance, reliability, and developer experience.
+          </p>
+          <div class="skills" style="margin-top:8px">
+            <span class="skill">.NET</span>
+            <span class="skill">SQL</span>
+            <span class="skill">Kubernetes</span>
+            <span class="skill">Helm</span>
+            <span class="skill">Grafana</span>
+            <span class="skill">Azure</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="dot"></div>
+          <h3>Software Engineer Intern — Creative Software</h3>
+          <div class="meta">Aug 2020 — Jul 2021 · Colombo, Sri Lanka</div>
+          <p>
+            Contributed to in‑app notification management, built internal tooling, and learned cloud-native practices
+            across containers, monitoring, and automation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="grid cols-3">
+      <div class="card section-card">
+        <h2>Languages</h2>
+        <div class="skills">
+          <span class="skill">C#</span>
+          <span class="skill">Python</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">SQL</span>
+        </div>
+      </div>
+      <div class="card section-card">
+        <h2>Cloud & DevOps</h2>
+        <div class="skills">
+          <span class="skill">Kubernetes</span>
+          <span class="skill">Helm</span>
+          <span class="skill">Docker</span>
+          <span class="skill">Azure</span>
+          <span class="skill">ArgoCD</span>
+        </div>
+      </div>
+      <div class="card section-card">
+        <h2>Observability</h2>
+        <div class="skills">
+          <span class="skill">OpenTelemetry</span>
+          <span class="skill">Prometheus</span>
+          <span class="skill">Grafana</span>
+          <span class="skill">Jaeger</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="grid cols-3" style="margin-top:10px">
+      <article class="project">
+        <div class="cap">
+          <h3>Notification Center — Admin Portal</h3>
+          <p>.NET + SQL admin portal to manage in‑app notifications and workflows.</p>
+          <div class="tags">
+            <span class="tag">.NET</span><span class="tag">SQL Server</span><span class="tag">Docker</span>
+          </div>
+          <div class="cta" style="margin-top:12px">
+            <a class="btn" href="https://github.com/Gihchathur" target="_blank" rel="noopener">Repo</a>
+          </div>
+        </div>
+        <div class="bar"></div>
+      </article>
+
+      <article class="project">
+        <div class="cap">
+          <h3>OpenTelemetry Dashboards</h3>
+          <p>Custom Grafana dashboards for Kubernetes workloads and Collector signals.</p>
+          <div class="tags">
+            <span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">OpenTelemetry</span>
+          </div>
+          <div class="cta" style="margin-top:12px">
+            <a class="btn" href="https://github.com/Gihchathur" target="_blank" rel="noopener">Repo</a>
+          </div>
+        </div>
+        <div class="bar"></div>
+      </article>
+
+      <article class="project">
+        <div class="cap">
+          <h3>Personal Portfolio</h3>
+          <p>This very site—made for speed, clarity, and a touch of neon.</p>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">No Framework</span>
+          </div>
+          <div class="cta" style="margin-top:12px">
+            <a class="btn" href="https://gihchathur.github.io/" target="_blank" rel="noopener">Live</a>
+          </div>
+        </div>
+        <div class="bar"></div>
+      </article>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card section-card" style="margin-top:10px">
+      <h2>Contact</h2>
+      <p>Let’s build something reliable together. I’m open to part‑time roles in Sweden and remote collaborations.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:gihchathurhan@gmail.com">Email Me</a>
+        <a class="btn" href="https://github.com/Gihchathur" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/gihan-chathuranga-159825194/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="links">
+      <span>© <span id="year"></span> Gihan Chathuranga</span>
+      • <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple theme toggle
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if(saved === 'light') document.body.classList.add('light');
+    btn.addEventListener('click', ()=>{
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+    });
+    btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+  </script>
+</body>
+</html>
